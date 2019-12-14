@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @model.memo %>
+</p>
+
+<p>
+  <strong>Memoable tpye:</strong>
+  <%= @model.memoable_tpye %>
+</p>
+
+<p>
+  <strong>Memoable:</strong>
+  <%= @model.memoable_id %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @model.body %>
+</p>
+
+<%= link_to 'Edit', edit_model_path(@model) %> |
+<%= link_to 'Back', models_path %>
