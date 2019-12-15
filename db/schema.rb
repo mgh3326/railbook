@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_150542) do
+ActiveRecord::Schema.define(version: 2019_12_15_031743) do
 
   create_table "authors", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 2019_12_14_150542) do
     t.string "name"
     t.string "email"
     t.integer "lock_version"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "memos", force: :cascade do |t|
+    t.string "memoable_type"
+    t.integer "memoable_id"
+    t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

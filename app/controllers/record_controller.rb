@@ -124,7 +124,7 @@ class RecordController < ApplicationController
   end
 
   def pluck
-    render text: Book.where(publish: '제이펍').pluck(:title, :price)
+    render plain: Book.where(publish: '제이펍').pluck(:title, :price)
   end
 
   def exists
@@ -133,7 +133,7 @@ class RecordController < ApplicationController
     # flag = Book.exists?(['price > ?', 50000])
     # flag = Book.exists?(publish: '제이펍')
     # flag = Book.exists?
-    render text: "존재하나요?: #{flag}"
+    render plain: "존재하나요?: #{flag}"
   end
 
   def scope
@@ -147,7 +147,7 @@ class RecordController < ApplicationController
   end
 
   def def_scope
-    render text: Review.all.inspect
+    render plain: Review.all.inspect
   end
 
   def count
@@ -157,12 +157,12 @@ class RecordController < ApplicationController
     # cnt = Book.distinct.count(:publish)
     # cnt = Book.group(:publish).count
 
-    render text: "#{cnt}개입니다."
+    render plain: "#{cnt}개입니다."
   end
 
   def average
     price = Book.where(publish: '제이펍').average('price')
-    render text: "평균 가격은 #{price}원입니다."
+    render plain: "평균 가격은 #{price}원입니다."
   end
 
   def groupby2
@@ -176,19 +176,19 @@ class RecordController < ApplicationController
 
   def update_all
     cnt = Book.where(publish: '한빛미디어').update_all(publish: '제이펍')
-    render text: "#{cnt}개의 데이터를 업데이트했습니다."
+    render plain: "#{cnt}개의 데이터를 업데이트했습니다."
   end
 
   def update_all2
     cnt = Book.order(:published).limit(5)
               .update_all('price = price * 0.8')
-    render text: "#{cnt}개의 데이터를 업데이트했습니다."
+    render plain: "#{cnt}개의 데이터를 업데이트했습니다."
   end
 
   def destroy_all
     Book.destroy_all(['publish <> ?', '제이펍'])
     # Book.where('publish <> ?', '제이펍').destroy_all
-    render text: '제거 완료'
+    render plain: '제거 완료'
   end
 
   def transact
@@ -201,9 +201,9 @@ class RecordController < ApplicationController
                      price: 2500, publish: '제이펍', published: '2011-01-01'})
       b2.save!
     end
-    render text: '트랜젝션에 성공했습니다.'
+    render plain: '트랜젝션에 성공했습니다.'
   rescue => e
-    render text: e.message
+    render plain: e.message
   end
 
   def transact2
@@ -211,9 +211,9 @@ class RecordController < ApplicationController
       @book = Book.find(1)
       @book.update(price: 3000)
     end
-    render text: '트랜젝션에 성공했습니다.'
+    render plain: '트랜젝션에 성공했습니다.'
   rescue => e
-    render text: e.message
+    render plain: e.message
   end
 
   def keywd
@@ -223,9 +223,9 @@ class RecordController < ApplicationController
   def keywd_process
     @search = SearchKeyword.new(params[:search_keyword])
     if @search.valid?
-      render text: @search.keyword
+      render plain: @search.keyword
     else
-      render text: @search.errors.full_messages[0]
+      render plain: @search.errors.full_messages[0]
     end
   end
 
@@ -251,16 +251,16 @@ class RecordController < ApplicationController
 
   def cache_counter
     @user = User.find(1)
-    render text: @user.reviews.size
+    render plain: @user.reviews.size
   end
 
   def memorize
     @book = Book.find(1)
     @memo = @book.memos.build({body: '이후에 구매'})
     if @memo.save
-      render text: '메모를 작성했습니다.'
+      render plain: '메모를 작성했습니다.'
     else
-      render text: @memo.errors.full_messages[0]
+      render plain: @memo.errors.full_messages[0]
     end
   end
 
