@@ -19,7 +19,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Password", with: @user.password
     fill_in "Reviews count", with: @user.reviews_count
     fill_in "Roles", with: @user.roles
-    fill_in "Slat", with: @user.slat
+    fill_in "Salt", with: @user.salt
     fill_in "Username", with: @user.username
     click_on "Create User"
 
@@ -36,7 +36,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Password", with: @user.password
     fill_in "Reviews count", with: @user.reviews_count
     fill_in "Roles", with: @user.roles
-    fill_in "Slat", with: @user.slat
+    fill_in "Salt", with: @user.salt
     fill_in "Username", with: @user.username
     click_on "Update User"
 
